@@ -13,6 +13,7 @@ void child_a(int fd[])
     perror("Redirecting of stdout to pipeline write failed!");
     exit(EXIT_FAILURE);
   }
+  close(fd[WRITE]);
   execlp("ls", "ls", "-F", "-1", NULL);
   perror("Exec 'ls' of child A failed!");
   exit(EXIT_FAILURE);
@@ -25,6 +26,7 @@ void child_b(int fd[])
     perror("Redirecting of stdin to pipeline read failed!");
     exit(EXIT_FAILURE);
   }
+  close(fd[READ]);
   execlp("nl", "nl", NULL);
   perror("Exec 'nl' of child B failed!");
   exit(EXIT_FAILURE);
